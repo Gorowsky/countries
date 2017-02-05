@@ -1,0 +1,45 @@
+<!doctype html>
+<html ng-app="app">
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+        <link rel="stylesheet" href="country-style.css"/>
+        <script src="https://code.angularjs.org/1.5.0/angular.min.js"></script>
+        <script src="countryController.js"></script>
+    </head>
+    <body>
+        <div id="country" ng-controller="countryController">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12" style="padding-top:40px;">
+                        <div class="input-group">
+                            <input type="text" class="form-control" ng-model="query" placeholder="Search countries"/>
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button" ng-click="getCountry();">Go!</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12" style="padding-top:30px;">
+                        <button class="btn btn-success" ng-click="sort();">Sort <i class="fa" ng-class='az? "fa-angle-down" : "fa-angle-up"'></i></button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="list-group">
+                            <li ng-repeat="item in list track by $index">
+                                <h2 ng-init="item.checked = false"><input type="checkbox" ng-model="item.checked" style="margin-right:20px"/>{{ item.name }}</h2>
+                                <p class="list-group">
+                                    <div class="list-group-item" ng-repeat="country in item.countries" ng-disabled="item.checked || country.checked" ng-class='item.checked || country.checked? "disabled" : ""'>
+                                        <input type="checkbox" ng-checked="item.checked || country.checked" ng-model="country.checked" ng-disabled="item.checked" style="margin-right:20px;" ng-change="checkBoxes(item);"/>{{ country.name }}
+                                    </div>
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

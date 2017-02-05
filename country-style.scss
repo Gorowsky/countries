@@ -1,0 +1,10 @@
+body{
+    & div#country{
+        & ul.list-group{
+            list-style: none;
+            & > li > h2{
+                padding-left: 17px;
+            }
+        }
+    }
+}
